@@ -703,6 +703,48 @@
         <link href='https://cdn.jsdelivr.net/npm/prismjs@1.24.1/plugins/toolbar/prism-toolbar.min.css'
             rel='stylesheet' />
     </noscript>
-    <script type="" src="/js/index.js"></script>
-    <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
+    {{-- <script type="" src="/js/index.js"></script>
+    <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script> --}}
+    <script
+  async
+  type="application/javascript"
+  subscriptions-control="manual"
+  src="https://news.google.com/swg/js/v1/swg.js">
+</script>
+
+    <script>
+        function linkSubscription(ppid) {
+            self.SWG.push(async (subscriptions) => {
+                try {
+                    const result = await subscriptions.linkSubscription({
+                        publisherProvidedId: ppid,
+                    })
+                    console.log(result)
+                } catch (e) {
+                    console.log(e)
+                }
+            })
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            (self.SWG = self.SWG || []).push(subscriptions => {
+                subscriptions.init("PUBLICATION_ID");
+
+                //Configure the event manager for analytics integration
+                subscriptions.getEventManager().then(manager => {
+                    manager.registerEventListener((event) => {
+                        // Add code here to send the event to your analytics
+                        // sendToAnalytics(event);
+                        console.log(event);
+                    });
+                });
+            });
+
+            document
+                .querySelector("SELECTOR")
+                .addEventListener('click', function() {
+                    linkSubscription(PPID)
+                })
+        });
+    </script>
 </body>

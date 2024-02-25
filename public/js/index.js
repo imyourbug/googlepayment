@@ -190,6 +190,9 @@ function addGooglePayButton() {
     const paymentsClient = getGooglePaymentsClient();
     const button =
         paymentsClient.createButton({
+            buttonColor: 'white',
+            buttonType: 'donate',
+            buttonLocale: 'en',
             onClick: onGooglePaymentButtonClicked
         });
     $('.container-btn-google').append(button);

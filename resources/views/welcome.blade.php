@@ -40,7 +40,7 @@
     <link rel="stylesheet" type="text/css" href="https://news.google.com/swg/js/v1/swg-button.css">
     <!-- Custome style -->
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <script async src="https://pay.google.com/gp/p/js/pay.js" onload="console.log('TODO: add onload function')"></script>
+    <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
 </head>
 
 <body class="is-single is-post" data-new-gr-c-s-check-loaded="14.1156.0" data-gr-ext-installed=""
@@ -436,11 +436,7 @@
                                 <div class="widget-title title-wrap">
                                     <h3 class="title">Donate</h3>
                                 </div>
-                                <div class="widget-content">
-                                    <button swg-standard-button="contribution" class="swg-button-v2-light"
-                                        role="button" lang="vi">
-                                        <div class="swg-button-v2-icon-light"></div>Contribute with Google
-                                    </button>
+                                <div class="widget-content container-btn-google">
                                 </div>
                             </div>
                             <div class="widget LinkList" data-version="2" id="LinkList1">
@@ -877,8 +873,10 @@
          */
         function onGooglePayLoaded() {
             const paymentsClient = getGooglePaymentsClient();
+            console.log(paymentsClient)
             paymentsClient.isReadyToPay(getGoogleIsReadyToPayRequest())
                 .then(function(response) {
+                    console.log(response);
                     if (response.result) {
                         addGooglePayButton();
                         // @todo prefetch payment data to improve performance after confirming site functionality
@@ -903,7 +901,7 @@
                 paymentsClient.createButton({
                     onClick: onGooglePaymentButtonClicked
                 });
-            document.getElementById('container').appendChild(button);
+            $('.container-btn-google').append(button);
         }
 
         /**

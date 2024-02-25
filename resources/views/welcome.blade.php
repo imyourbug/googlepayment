@@ -705,11 +705,7 @@
     </noscript>
     {{-- <script type="" src="/js/index.js"></script>
     <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script> --}}
-    <script
-  async
-  type="application/javascript"
-  subscriptions-control="manual"
-  src="https://news.google.com/swg/js/v1/swg.js">
+    <script async type="application/javascript" subscriptions-control="manual" src="https://news.google.com/swg/js/v1/swg.js">
 </script>
 
     <script>
@@ -747,4 +743,20 @@
                 })
         });
     </script>
+    {{-- <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "isAccessibleForFree": false,
+        "publisher": {
+            "@type": "Organization",
+            "name": "Herald Foo Times"
+        },
+        "isPartOf": {
+            "@type": ["CreativeWork", "Product"],
+            "name" : "Herald Foo Times",
+            "productID": "herald-foo-times.com:basic"
+        }
+        }
+    </script> --}}
 </body>

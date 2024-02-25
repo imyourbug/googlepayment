@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=yes"
         name="viewport">
     <title>
-        GG
+        Test
     </title>
     <link href="//fonts.gstatic.com" rel="dns-prefetch">
     <link href="//dnjs.cloudflare.com" rel="dns-prefetch">

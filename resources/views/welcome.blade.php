@@ -136,9 +136,6 @@
                             <div class="widget Blog" data-version="2" id="Blog1">
                                 <div class="blog-posts hfeed item-post-wrap">
                                     <article class="blog-post hentry item-post">
-                                        <script type="application/ld+json">{"@context":"https://schema.org","@type":["BlogPosting","NewsArticle"],"mainEntityOfPage":{"@type":"WebPage","@id":"https://tieumacay.blogspot.com/2023/09/chuyen-hen-ho-cua-7x.html"},"headline":"Donate 1","description":"Number 1   ","datePublished":"2023-09-09T02:24:00-07:00","dateModified":"2024-02-17T01:50:26-08:00","image":{"@type":"ImageObject","url":"https://lh3.googleusercontent.com/ULB6iBuCeTVvSjjjU1A-O8e9ZpVba6uvyhtiWRti_rBAs9yMYOFBujxriJRZ-A=w1200","height":348,"width":1200},"author":{"@type":"Person","name":"sulento"},"publisher":{"@type":"Organization","name":"Blogger","logo":{"@type":"ImageObject","url":"https://lh3.googleusercontent.com/ULB6iBuCeTVvSjjjU1A-O8e9ZpVba6uvyhtiWRti_rBAs9yMYOFBujxriJRZ-A=h60","width":206,"height":60}},"isAccessibleForFree":true,"isPartOf":{"productID":"CAowupSnDA:openaccess","@type":["Product"]}}</script>
-                                        <script role="rating" type="application/ld+json">{"@context":"https://schema.org/","@type":"CreativeWorkSeries","name":"Donate 1","aggregateRating":{"@type":"AggregateRating","ratingValue":4.6,"bestRating":"5","ratingCount":633}}</script>
-
                                         <div class="item-post-inner">
                                             <div class="entry-header blog-entry-header p-eh has-meta">
                                                 <nav id="breadcrumb"><a class="home"
@@ -146,7 +143,6 @@
                                                         class="delimiter"></em><a class="label"
                                                         href="https://tieumacay.blogspot.com/search/label/VIP">VIP</a>
                                                 </nav>
-                                                <script type="application/ld+json">{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tieumacay.blogspot.com/"},{"@type":"ListItem","position":2,"name":"VIP","item":"https://tieumacay.blogspot.com/search/label/VIP"},{"@type":"ListItem","position":3,"name":"Donate 1","item":"https://tieumacay.blogspot.com/2023/09/chuyen-hen-ho-cua-7x.html"}]}</script>
                                                 <h1 class="entry-title">Donate 1</h1>
                                                 <div class="entry-meta">
                                                     <div class="align-left">
@@ -715,19 +711,85 @@
 
     <script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/1221747029-widgets.js"></script>
     <script>
-        const GATEWAY_MERCHANT_ID = ""; // required
-        // Step 2: Request a payment token for your payment provider
+        // const GATEWAY_MERCHANT_ID = ""; // required
+        // // Step 2: Request a payment token for your payment provider
+        // const tokenizationSpecification = {
+        //     type: 'PAYMENT_GATEWAY',
+        //     parameters: {
+        //         gateway: "allpayments",
+        //         gatewayMerchantId: GATEWAY_MERCHANT_ID
+        //     }
+        // };
+        // // Step 3: Define supported payment card networks
+        // const allowedCardNetworks = ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"];
+        // const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
+        // // Step 4: Describe your allowed payment methods
+        // const baseCardPaymentMethod = {
+        //     type: 'CARD',
+        //     parameters: {
+        //         allowedAuthMethods: allowedCardAuthMethods,
+        //         allowedCardNetworks: allowedCardNetworks
+        //     }
+        // };
+        // const cardPaymentMethod = Object.assign({
+        //         tokenizationSpecification: tokenizationSpecification
+        //     },
+        //     baseCardPaymentMethod
+        // );
+        // // Step 5: Load the Google Pay API JavaScript library
+        // console.log(cardPaymentMethod);
+
+        /**
+         * Define the version of the Google Pay API referenced when creating your
+         * configuration
+         *
+         * @see {@link https://developers.google.com/pay/api/web/reference/request-objects#PaymentDataRequest|apiVersion in PaymentDataRequest}
+         */
+        const baseRequest = {
+            apiVersion: 2,
+            apiVersionMinor: 0
+        };
+
+        /**
+         * Card networks supported by your site and your gateway
+         *
+         * @see {@link https://developers.google.com/pay/api/web/reference/request-objects#CardParameters|CardParameters}
+         * @todo confirm card networks supported by your site and gateway
+         */
+        const allowedCardNetworks = ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"];
+
+        /**
+         * Card authentication methods supported by your site and your gateway
+         *
+         * @see {@link https://developers.google.com/pay/api/web/reference/request-objects#CardParameters|CardParameters}
+         * @todo confirm your processor supports Android device tokens for your
+         * supported card networks
+         */
+        const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
+
+        /**
+         * Identify your gateway and your site's gateway merchant identifier
+         *
+         * The Google Pay API response will return an encrypted payment method capable
+         * of being charged by a supported gateway after payer authorization
+         *
+         * @todo check with your gateway on the parameters to pass
+         * @see {@link https://developers.google.com/pay/api/web/reference/request-objects#gateway|PaymentMethodTokenizationSpecification}
+         */
         const tokenizationSpecification = {
             type: 'PAYMENT_GATEWAY',
             parameters: {
-                gateway: "allpayments",
-                gatewayMerchantId: GATEWAY_MERCHANT_ID
+                'gateway': 'allpayments',
+                'gatewayMerchantId': 'BCR2DN4T7XJPTH27'
             }
         };
-        // Step 3: Define supported payment card networks
-        const allowedCardNetworks = ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"];
-        const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
-        // Step 4: Describe your allowed payment methods
+
+        /**
+         * Describe your site's support for the CARD payment method and its required
+         * fields
+         *
+         * @see {@link https://developers.google.com/pay/api/web/reference/request-objects#CardParameters|CardParameters}
+         */
         const baseCardPaymentMethod = {
             type: 'CARD',
             parameters: {
@@ -735,12 +797,177 @@
                 allowedCardNetworks: allowedCardNetworks
             }
         };
-        const cardPaymentMethod = Object.assign({
+
+        /**
+         * Describe your site's support for the CARD payment method including optional
+         * fields
+         *
+         * @see {@link https://developers.google.com/pay/api/web/reference/request-objects#CardParameters|CardParameters}
+         */
+        const cardPaymentMethod = Object.assign({},
+            baseCardPaymentMethod, {
                 tokenizationSpecification: tokenizationSpecification
-            },
-            baseCardPaymentMethod
+            }
         );
-        // Step 5: Load the Google Pay API JavaScript library
-        console.log(cardPaymentMethod);
+
+        /**
+         * An initialized google.payments.api.PaymentsClient object or null if not yet set
+         *
+         * @see {@link getGooglePaymentsClient}
+         */
+        let paymentsClient = null;
+
+        /**
+         * Configure your site's support for payment methods supported by the Google Pay
+         * API.
+         *
+         * Each member of allowedPaymentMethods should contain only the required fields,
+         * allowing reuse of this base request when determining a viewer's ability
+         * to pay and later requesting a supported payment method
+         *
+         * @returns {object} Google Pay API version, payment methods supported by the site
+         */
+        function getGoogleIsReadyToPayRequest() {
+            return Object.assign({},
+                baseRequest, {
+                    allowedPaymentMethods: [baseCardPaymentMethod]
+                }
+            );
+        }
+
+        /**
+         * Configure support for the Google Pay API
+         *
+         * @see {@link https://developers.google.com/pay/api/web/reference/request-objects#PaymentDataRequest|PaymentDataRequest}
+         * @returns {object} PaymentDataRequest fields
+         */
+        function getGooglePaymentDataRequest() {
+            const paymentDataRequest = Object.assign({}, baseRequest);
+            paymentDataRequest.allowedPaymentMethods = [cardPaymentMethod];
+            paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
+            paymentDataRequest.merchantInfo = {
+                // @todo a merchant ID is available for a production environment after approval by Google
+                // See {@link https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist|Integration checklist}
+                // merchantId: '01234567890123456789',
+                merchantName: 'Example Merchant'
+            };
+            return paymentDataRequest;
+        }
+
+        /**
+         * Return an active PaymentsClient or initialize
+         *
+         * @see {@link https://developers.google.com/pay/api/web/reference/client#PaymentsClient|PaymentsClient constructor}
+         * @returns {google.payments.api.PaymentsClient} Google Pay API client
+         */
+        function getGooglePaymentsClient() {
+            if (paymentsClient === null) {
+                paymentsClient = new google.payments.api.PaymentsClient({
+                    environment: 'TEST'
+                });
+            }
+            return paymentsClient;
+        }
+
+        /**
+         * Initialize Google PaymentsClient after Google-hosted JavaScript has loaded
+         *
+         * Display a Google Pay payment button after confirmation of the viewer's
+         * ability to pay.
+         */
+        function onGooglePayLoaded() {
+            const paymentsClient = getGooglePaymentsClient();
+            paymentsClient.isReadyToPay(getGoogleIsReadyToPayRequest())
+                .then(function(response) {
+                    if (response.result) {
+                        addGooglePayButton();
+                        // @todo prefetch payment data to improve performance after confirming site functionality
+                        // prefetchGooglePaymentData();
+                    }
+                })
+                .catch(function(err) {
+                    // show error in developer console for debugging
+                    console.error(err);
+                });
+        }
+
+        /**
+         * Add a Google Pay purchase button alongside an existing checkout button
+         *
+         * @see {@link https://developers.google.com/pay/api/web/reference/request-objects#ButtonOptions|Button options}
+         * @see {@link https://developers.google.com/pay/api/web/guides/brand-guidelines|Google Pay brand guidelines}
+         */
+        function addGooglePayButton() {
+            const paymentsClient = getGooglePaymentsClient();
+            const button =
+                paymentsClient.createButton({
+                    onClick: onGooglePaymentButtonClicked
+                });
+            document.getElementById('container').appendChild(button);
+        }
+
+        /**
+         * Provide Google Pay API with a payment amount, currency, and amount status
+         *
+         * @see {@link https://developers.google.com/pay/api/web/reference/request-objects#TransactionInfo|TransactionInfo}
+         * @returns {object} transaction info, suitable for use as transactionInfo property of PaymentDataRequest
+         */
+        function getGoogleTransactionInfo() {
+            return {
+                countryCode: 'US',
+                currencyCode: 'USD',
+                totalPriceStatus: 'FINAL',
+                // set to cart total
+                totalPrice: '1.00'
+            };
+        }
+
+        /**
+         * Prefetch payment data to improve performance
+         *
+         * @see {@link https://developers.google.com/pay/api/web/reference/client#prefetchPaymentData|prefetchPaymentData()}
+         */
+        function prefetchGooglePaymentData() {
+            const paymentDataRequest = getGooglePaymentDataRequest();
+            // transactionInfo must be set but does not affect cache
+            paymentDataRequest.transactionInfo = {
+                totalPriceStatus: 'NOT_CURRENTLY_KNOWN',
+                currencyCode: 'USD'
+            };
+            const paymentsClient = getGooglePaymentsClient();
+            paymentsClient.prefetchPaymentData(paymentDataRequest);
+        }
+
+        /**
+         * Show Google Pay payment sheet when Google Pay payment button is clicked
+         */
+        function onGooglePaymentButtonClicked() {
+            const paymentDataRequest = getGooglePaymentDataRequest();
+            paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
+
+            const paymentsClient = getGooglePaymentsClient();
+            paymentsClient.loadPaymentData(paymentDataRequest)
+                .then(function(paymentData) {
+                    // handle the response
+                    processPayment(paymentData);
+                })
+                .catch(function(err) {
+                    // show error in developer console for debugging
+                    console.error(err);
+                });
+        }
+
+        /**
+         * Process payment data returned by the Google Pay API
+         *
+         * @param {object} paymentData response from Google Pay API after user approves payment
+         * @see {@link https://developers.google.com/pay/api/web/reference/response-objects#PaymentData|PaymentData object reference}
+         */
+        function processPayment(paymentData) {
+            // show returned data in developer console for debugging
+            console.log(paymentData);
+            // @todo pass payment token to your gateway to process payment
+            paymentToken = paymentData.paymentMethodData.tokenizationData.token;
+        }
     </script>
 </body>

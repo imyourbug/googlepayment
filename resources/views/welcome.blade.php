@@ -434,6 +434,7 @@
                             <div class="widget HTML" data-version="2" id="HTML16">
                                 <div class="widget-title title-wrap">
                                     <h3 class="title">Donate</h3>
+                                    <button swg-standard-button="contribution"></button>
                                 </div>
                                 <div class="widget-content container-btn-google">
                                 </div>
@@ -708,39 +709,19 @@
     <script async type="application/javascript" subscriptions-control="manual" src="https://news.google.com/swg/js/v1/swg.js">
 </script>
 
+    <script async type="application/javascript"
+        src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
     <script>
-        function linkSubscription(ppid) {
-            self.SWG.push(async (subscriptions) => {
-                try {
-                    const result = await subscriptions.linkSubscription({
-                        publisherProvidedId: ppid,
-                    })
-                    console.log(result)
-                } catch (e) {
-                    console.log(e)
-                }
-            })
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            (self.SWG = self.SWG || []).push(subscriptions => {
-                subscriptions.init("PUBLICATION_ID");
-
-                //Configure the event manager for analytics integration
-                subscriptions.getEventManager().then(manager => {
-                    manager.registerEventListener((event) => {
-                        // Add code here to send the event to your analytics
-                        // sendToAnalytics(event);
-                        console.log(event);
-                    });
-                });
+        (self.SWG_BASIC = self.SWG_BASIC || []).push(basicSubscriptions => {
+            basicSubscriptions.init({
+                type: "NewsArticle",
+                isPartOfType: ["Product"],
+                isPartOfProductId: "CAowqMnWCw:openaccess",
+                clientOptions: {
+                    theme: "light",
+                    lang: "en"
+                },
             });
-
-            document
-                .querySelector("SELECTOR")
-                .addEventListener('click', function() {
-                    linkSubscription(PPID)
-                })
         });
     </script>
     {{-- <script type="application/ld+json">

@@ -434,9 +434,9 @@
                             <div class="widget HTML" data-version="2" id="HTML16">
                                 <div class="widget-title title-wrap">
                                     <h3 class="title">Donate</h3>
-                                    <button swg-standard-button="contribution"></button>
                                 </div>
                                 <div class="widget-content container-btn-google">
+                                    <button swg-standard-button="contribution"></button>
                                 </div>
                             </div>
                             <div class="widget LinkList" data-version="2" id="LinkList1">
